@@ -22,8 +22,20 @@ fun multiplyTargetPair(expenses: List<Int>, targetSum: Int): Int? {
   return null
 }
 
+fun multiplyTargetTriplet(expenses: List<Int>, targetSum: Int): Int? {
+  for (expense in expenses) {
+    val otherExpenses = expenses.toMutableList().apply { remove(expense) }
+    val productOfPair = multiplyTargetPair(otherExpenses, targetSum - expense)
+    if (productOfPair != null) {
+      return expense * productOfPair
+    }
+  }
+  return null
+}
+
 fun main() {
   val expenses = getSortedExpenseList()
   println("Part 1: " + multiplyTargetPair(expenses, 2020))
+  println("Part 2: " + multiplyTargetTriplet(expenses, 2020))
 }
 
