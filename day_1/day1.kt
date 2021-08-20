@@ -16,7 +16,7 @@ fun multiplyTargetPair(expenses: List<Int>, targetSum: Int): Int? {
     when {
       curSum == targetSum -> return expenses[left] * expenses[right]
       curSum < targetSum  -> left++
-      else                -> right--
+      curSum > targetSum  -> right--
     }
   }
   return null
