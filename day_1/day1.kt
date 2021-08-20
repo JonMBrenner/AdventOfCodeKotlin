@@ -1,24 +1,29 @@
 import java.io.File
 
-fun getExpenseSet(): Set<Int> {
-  val expenseSet = mutableSetOf<Int>()
-  File("input.txt").forEachLine { expenseSet.add(it.toInt()) }
-  return expenseSet
+fun getSortedExpenseList(): List<Int> {
+  return File("input.txt").useLines { lines ->
+    lines.map { it.toInt() }
+         .sorted()
+         .toList()
+  }
 }
 
-fun findSolution(expenses: Set<Int>) {
-  for (expense in expenses) {
-    val complement = 2020 - expense
-    if (expenses.contains(complement)) {
-      println(expense * complement)
-      return
+fun multiplyTargetPair(expenses: List<Int>, targetSum: Int): Int? {
+  var left = 0
+  var right = expenses.size - 1
+  while (left < right) {
+    val curSum = expenses[left] + expenses[right]
+    when {
+      curSum == targetSum -> return expenses[left] * expenses[right]
+      curSum < targetSum  -> left++
+      else                -> right--
     }
   }
-  println("no solution exists")
+  return null
 }
 
 fun main() {
-  val expenses = getExpenseSet()
-  findSolution(expenses);
+  val expenses = getSortedExpenseList()
+  println("Part 1: " + multiplyTargetPair(expenses, 2020))
 }
 
