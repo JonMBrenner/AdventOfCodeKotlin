@@ -9,7 +9,7 @@ fun isValidPart1(inputLine: String): Boolean {
   val min = range.substringBefore("-").toInt()
   val max = range.substringAfter("-").toInt()
 
-  val letterCount = password.filter { it == letter }.count()
+  val letterCount = password.count { it == letter }
   return letterCount in min..max
 }
 

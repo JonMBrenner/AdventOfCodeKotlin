@@ -1,12 +1,11 @@
 import java.io.File
 
-fun getSortedExpenseList(): List<Int> {
-  return File("input.txt").useLines { lines ->
+fun getSortedExpenseList(): List<Int> =
+  File("input.txt").useLines { lines ->
     lines.map { it.toInt() }
          .sorted()
          .toList()
   }
-}
 
 fun multiplyTargetPair(expenses: List<Int>, targetSum: Int): Int? {
   var left = 0
