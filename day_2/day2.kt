@@ -10,7 +10,7 @@ fun isValidPassword(inputLine: String): Boolean {
   val max = range.substringAfter("-").toInt()
 
   val letterCount = password.filter { it == letter }.count()
-  return letterCount >= min && letterCount <= max
+  return letterCount in min..max
 }
 
 fun main() {
